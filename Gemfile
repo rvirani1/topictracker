@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'figaro'
 gem 'haml-rails'
 gem 'erb2haml'
+# gem 'pg_search'
 
 
 group :development do
@@ -23,6 +24,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  # gem 'rack-ssl-enforcer'
 end
 
 
