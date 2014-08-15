@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'figaro'
 gem 'haml-rails'
 gem 'erb2haml'
+gem 'devise'
 # gem 'pg_search'
 
 
