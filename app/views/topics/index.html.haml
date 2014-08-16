@@ -1,0 +1,33 @@
+- if user_signed_in?
+  .row
+    .col-md-3
+    .col-md-6
+      =link_to(new_topic_path) do
+        %button.btn.btn-primary.btn-lg.btn-block(type="button") New Topic!
+    .col-md-3
+.row
+  .col-md-2
+  .col-md-8
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th #
+          %th Title
+          %th Description
+          %th.editcolumn
+      %tbody
+        -@topics.each do |topic|
+          %tr
+            %td
+              %a{:href => topic_path(topic)}
+                .cell= topic.id
+            %td
+              %a{:href => topic_path(topic)}
+                .cell=topic.title
+            %td
+              %a{:href => topic_path(topic)}
+                .cell= topic.description
+            %td.editcolumn
+              - if topic.user == current_user
+                =link_to "Edit", edit_topic_path(topic), :class => "btn btn-warning", :type => "button"
+  .col-md-2
