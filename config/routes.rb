@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: "topics#index"
   resources :topics
 
+  post 'votes' => 'votes#create', as: :create_vote
+  delete 'votes' => 'votes#delete', as: :delete_vote
+
   #after_sign_in_path_for
 
   # Example of regular route:

@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  before_action :set_topic, only: [:show, :edit, :update, :destroy]
   before_action :set_topics
 
   def index
@@ -11,18 +12,14 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id])
   end
 
   def edit
-    @topic = Topic.find(params[:id])
-    unless user_signed_in? && (@topic.user == current_user)
-      redirect_to topic_path(@topic), :alert => "You can't edit this topic."
-    end
+    check_topic_authorization("You can't edit this topic.")
   end
 
   def create
-    @topic = Topic.new(title: params[:title], description: params[:description], user_id: current_user.id)
+    @topic = Topic.new(title: params[:title], description: params[:description], creator_id: current_user.id)
     if @topic.save
       redirect_to topics_path, :notice => "New topic saved"
     else
@@ -31,9 +28,35 @@ class TopicsController < ApplicationController
     end
   end
 
+  def update
+    check_topic_authorization("You can't update this topic!")
+    @topic.title = params[:title]
+    @topic.description = params[:description]
+    @topic.save!
+    redirect_to topic_path(@topic), :notice => "Topic updated"
+  end
+
+  def destroy
+    check_topic_authorization("You can't destroy this topic!")
+    if Topic.destroy(@topic)
+      redirect_to topics_path, :notice => "You deleted a topic"
+    end
+  end
+
   private
+
+  def set_topic
+    @topic = Topic.find(params[:id])
+  end
 
   def set_topics
     @topics = Topic.all
+  end
+
+
+  def check_topic_authorization(message="This action isn't allowed")
+    unless user_signed_in? && (@topic.creator == current_user)
+      redirect_to topic_path(@topic), :alert => message
+    end
   end
 end
