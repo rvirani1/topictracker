@@ -9,6 +9,8 @@
         %p.text-center
           Filtering by Tag:
           %span.label.label-default= @tag.name
+          =link_to topics_path do
+            %span.glyphicon.glyphicon-remove
     .col-md-3
       =form_tag(topics_path, method: :get, role: "Search") do
         .input-group
@@ -26,7 +28,9 @@
           %th{:"data-defaultsort" => 'disabled'}
           %th{:"data-defaultsort" => 'disabled'}
           %th.votecolumn Votes
-          %th Title
+          %th
+            Title
+            %span.pull-right Tags
           %th.creatorcolumn Creator
           %th.editcolumn{:"data-defaultsort" => 'disabled'}
       %tbody
@@ -50,7 +54,7 @@
                 .cell=topic.title
               - topic.tags.each do |tag|
                 =link_to(tag_path(tag)) do
-                  %span.label.label-default.pull-right= tag.name
+                  %span.label.label-primary.pull-right.tag= tag.name
             %td.creatorcolumn
               %a{:href => topic_path(topic)}
                 .cell= topic.creator.username

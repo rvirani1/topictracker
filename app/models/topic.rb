@@ -10,4 +10,17 @@ class Topic < ActiveRecord::Base
   validates_presence_of :title, :creator_id
   validates_uniqueness_of :title
 
+
+
+  def add_tags_to_topic(tag_selectors)
+    tag_selectors.each do |tag_name|
+      if Tag.find_by_name(tag_name)
+        self.tags << Tag.find_by_name(tag_name)
+      else
+        self.tags << Tag.new(name: tag_name)
+      end
+    end
+  end
+
+  # @existing_tags = params[:tag_selector].select { |x| x =~ /^\d+$/ }
 end

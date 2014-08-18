@@ -24,18 +24,7 @@ class TopicsController < ApplicationController
   def create
     #Create Topic
     @topic = Topic.new(title: params[:title], description: params[:description], creator_id: current_user.id)
-    #Find existing tags and add to topic
-    params[:tag_selector].each do |tag_name|
-      if Tag.find_by_name(tag_name)
-        @topic.tags << Tag.find_by_name(tag_name)
-      else
-        binding.pry
-        @topic.tags << Tag.new(name: tag_name)
-        binding.pry
-      end
-    end
-
-    # @existing_tags = params[:tag_selector].select { |x| x =~ /^\d+$/ }
+    @topic.add_tags_to_topic(params[:tag_selector])
 
     if @topic.save
       redirect_to topics_path, :notice => "New topic saved"
