@@ -5,10 +5,6 @@
       =link_to(new_topic_path) do
         %button.btn.btn-primary.btn-block(type="button") New Topic!
     .col-md-3
-      -if @tag
-        %p.text-center
-          Filtering by Tag:
-          %span.label.label-default= @tag.name
     .col-md-3
       =form_tag(topics_path, method: :get, role: "Search") do
         .input-group
@@ -34,14 +30,13 @@
           %tr
             %td.votecolumn
               -if user_signed_in?
-                - plus_glyph_class = current_user.voted?(topic) ? "invisible" : ""
+                - plus_glyph_class = already_voted?(topic) ? "invisible" : ""
                 =link_to votes_path(topic_id: topic.id), :class => plus_glyph_class, :method => :post do
                   %span.glyphicon.glyphicon-plus-sign
             %td.votecolumn
-              -if user_signed_in?
-                - minus_glyph_class = current_user.voted?(topic) ? "" : "invisible"
-                =link_to vote_path(topic_id: topic.id), method: :delete , class: minus_glyph_class do
-                  %span.glyphicon.glyphicon-minus-sign
+              - minus_glyph_class = already_voted?(topic) ? "" : "invisible"
+              =link_to vote_path(topic_id: topic.id), method: :delete , class: minus_glyph_class do
+                %span.glyphicon.glyphicon-minus-sign
             %td.votecolumn
               %a{:href => topic_path(topic)}
                 .cell= topic.votes.count

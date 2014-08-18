@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
+  get '/users' => 'users#show'
   root to: "topics#index"
-  resources :topics
+  resources :topics do
+    post 'tags' => 'tags#create', as: :create_tag
+    delete 'tags/:id'=> 'tags#destroy', as: :destroy_tag
+  end
+  get 'tags/:id' => 'tags#show', as: :tag
 
-  post 'votes' => 'votes#create', as: :create_vote
-  delete 'votes' => 'votes#delete', as: :delete_vote
+  post 'votes' => 'votes#create', as: :votes
+  delete 'votes' => 'votes#destroy', as: :vote
 
   #after_sign_in_path_for
 

@@ -9,7 +9,9 @@
           .form-group
             = text_field_tag(:title, "", :required => "required", :class => "form-control", :placeholder => "Enter topic title")
           .form-group
-            = text_area_tag(:description, "", :required => "required", :class => "form-control", :placeholder => "Enter topic description", :rows => "5", :maxlength => "255")
+            = select_tag "tag_selector", options_for_select(Tag.all.map{ |tag| [tag.name, tag.name] }), multiple: true, placeholder: "Select tag(s)...", class: "selectize-control tag_selector"
+          .form-group
+            = text_area_tag(:description, "", :required => "required", :class => "form-control", :id => "descriptionarea", :placeholder => "Enter topic description", :rows => "5", :maxlength => "255", :"data-provide" => "markdown")
           .form-group
             = submit_tag("Create New Topic", class: "btn btn-default")
   .col-md-3

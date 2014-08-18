@@ -2,23 +2,26 @@
 %html
   %head
     %title TopicTracker
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
     %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", :rel=>"stylesheet"}
     %script{:src=>"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"}
+    %script{:src=>"//cdn.jsdelivr.net/momentjs/2.8.1/moment.min.js"}
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
   %body
     %nav.navbar.navbar-default(role = "navigation")
       .navbar-header
-        %a.navbar-brand TopicTracker
+        =link_to "TopicTracker", root_path, class: "navbar-brand"
       %ul.nav.navbar-nav.navbar-right
         -if user_signed_in?
+          %li.btn.btn-default= link_to "Profile", edit_user_registration_path
           %li.btn.btn-default= link_to "Logout", destroy_user_session_path, :method => :delete
         -else
           %li.btn.btn-default=link_to "Sign Up", new_user_registration_path
           %li.btn.btn-default=link_to "Login", new_user_session_path
+    -# TODO is there a better way to do the stuff below
     - if notice
-      %p.notice= flash[:notice]
+      #notice.invisible{ :"data-notice" => flash[:notice] }= flash[:notice]
     -if alert
-      %p.alert= flash[:alert]
+      #alert.invisible{ :"data-alert" => flash[:alert] }= flash[:alert]
     = yield

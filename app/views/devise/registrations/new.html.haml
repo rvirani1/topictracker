@@ -5,9 +5,21 @@
     = form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:role => 'form'}) do |f|
       = devise_error_messages!
       %div.form-group
+        = f.label :username
+        %br/
+        = f.text_field :username, autofocus: true, class: "form-control", placeholder: "Pick a username"
+      %div.form-group
+        = f.label :firstname
+        %br/
+        = f.text_field :firstname, autofocus: true, class: "form-control", placeholder: "Enter your first name"
+      %div.form-group
+        = f.label :lastname
+        %br/
+        = f.text_field :lastname, autofocus: true, class: "form-control", placeholder: "Enter your last name"
+      %div.form-group
         = f.label :email
         %br/
-        = f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Enter email"
+        = f.email_field :email, :class => "form-control", :placeholder => "Enter email"
       %div.form-group
         = f.label :password
         - if @validatable

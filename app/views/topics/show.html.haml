@@ -4,7 +4,11 @@
     .panel.panel-default
       .panel-heading
         %h3.panel-title= @topic.title
+        -if @topic.creator == current_user
+          %span= link_to "Edit", edit_topic_path(@topic), class: "btn btn-default pull-right"
       .panel-body
-        = @topic.description
-        = link_to "Back", topics_path, class: "btn btn-default floatright"
+        -# TODO What's the right place to put the markdown thing since I only need it once
+        != MARKDOWN.render(@topic.description)
+
+        = link_to "Back", topics_path, class: "btn pull-left"
   .col-md-3

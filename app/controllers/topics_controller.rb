@@ -3,6 +3,9 @@ class TopicsController < ApplicationController
   before_action :set_topics
 
   def index
+    unless (params[:search_value] == "") || (params[:search_value] == nil)
+      @topics = Topic.search_by_topic(params[:search_value])
+    end
   end
 
   def new
@@ -19,7 +22,21 @@ class TopicsController < ApplicationController
   end
 
   def create
+    #Create Topic
     @topic = Topic.new(title: params[:title], description: params[:description], creator_id: current_user.id)
+    #Find existing tags and add to topic
+    params[:tag_selector].each do |tag_name|
+      if Tag.find_by_name(tag_name)
+        @topic.tags << Tag.find_by_name(tag_name)
+      else
+        binding.pry
+        @topic.tags << Tag.new(name: tag_name)
+        binding.pry
+      end
+    end
+
+    # @existing_tags = params[:tag_selector].select { |x| x =~ /^\d+$/ }
+
     if @topic.save
       redirect_to topics_path, :notice => "New topic saved"
     else
