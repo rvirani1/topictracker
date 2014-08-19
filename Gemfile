@@ -23,8 +23,8 @@ gem 'aws-sdk'
 group :development do
   gem 'spring'
   gem 'pry-rails'
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
   gem 'quiet_assets'
 end
 
