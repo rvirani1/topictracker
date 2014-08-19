@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_action check_vote_authorization, :only => [:destroy]
+  before_action :check_vote_authorization, :only => [:destroy]
 
   def create
     topic = Topic.find(params[:topic_id])
