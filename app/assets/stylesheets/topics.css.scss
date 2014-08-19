@@ -21,7 +21,7 @@ input[type="submit"] {
 }
 
 .creatorcolumn {
-  width: 14%;
+  width: 17%;
 }
 
 .editcolumn {
@@ -37,4 +37,16 @@ input[type="submit"] {
 
 .tag {
   margin: 1%;
+}
+
+#user_avatar {
+  display:inline;
+}
+
+#profile_thumbnail {
+  display: inline;
+}
+
+.thumbnail {
+  margin-bottom: 0;
 }

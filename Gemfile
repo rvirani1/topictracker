@@ -17,7 +17,8 @@ gem 'erb2haml'
 gem 'devise'
 gem 'redcarpet'
 gem 'pg_search'
-
+gem 'paperclip', "~> 4.1"
+gem 'aws-sdk'
 
 group :development do
   gem 'spring'

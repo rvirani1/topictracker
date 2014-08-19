@@ -57,6 +57,7 @@
                   %span.label.label-primary.pull-right.tag= tag.name
             %td.creatorcolumn
               %a{:href => topic_path(topic)}
+                = image_tag topic.creator.avatar.url(:icon), class: "thumbnail", id: "profile_thumbnail"
                 .cell= topic.creator.username
             %td.editcolumn
               - if topic.creator == current_user
