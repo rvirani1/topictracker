@@ -7,8 +7,10 @@
         -if @topic.creator == current_user
           %span= link_to "Edit", edit_topic_path(@topic), class: "btn btn-default pull-right"
       .panel-body
-        -# TODO What's the right place to put the markdown thing since I only need it once
         != MARKDOWN.render(@topic.description)
 
         = link_to "Back", topics_path, class: "btn pull-left"
+        - @topic.tags.each do |tag|
+          = link_to(tag_path(tag)) do
+            %span.label.label-primary.pull-right.tag= tag.name
   .col-md-3

@@ -38,6 +38,7 @@ class TopicsController < ApplicationController
     check_topic_authorization("You can't update this topic!")
     @topic.title = params[:title]
     @topic.description = params[:description]
+    @topic.add_tags_to_topic(params[:tag_selector])
     @topic.save!
     redirect_to topic_path(@topic), :notice => "Topic updated"
   end
