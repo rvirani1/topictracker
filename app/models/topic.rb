@@ -14,11 +14,9 @@ class Topic < ActiveRecord::Base
   def add_tags_to_topic(tag_selectors)
     #TODO remove stink
     self.tags.each do |tag|
-      binding.pry
       unless tag_selectors.include?(tag.name)
         self.tags.delete(Tag.find_by_name(tag.name))
       end
-      binding.pry
     end
 
     tag_selectors.each do |tag_name|
