@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   resources :topics do
     post 'tags' => 'tags#create', as: :create_tag
     delete 'tags/:id'=> 'tags#destroy', as: :destroy_tag
+
+    resources :comments, :only => [:create, :destroy, :update]
   end
   get 'tags/:id' => 'tags#show', as: :tag
 
+  # resources :votes, :only => [:create, :destroy]
   post 'votes' => 'votes#create', as: :votes
   delete 'votes' => 'votes#destroy', as: :vote
 

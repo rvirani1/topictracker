@@ -18,3 +18,11 @@
  *= require_tree .
  *= require_self
  */
+
+.navbar-right {
+    margin-right: 2em;
+}
+
+.inline {
+    display: inline;
+}

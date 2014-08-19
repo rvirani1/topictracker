@@ -1,0 +1,6 @@
+=form_tag(topics_path, method: :get, role: "Search") do
+  .input-group
+    %span.input-group-addon.glyphicon.glyphicon-search
+    =text_field_tag(:search_value, value_search(params), placeholder: "Search", class: "form-control")
+    %span.input-group-btn
+      =submit_tag("Submit", class: "btn btn-default")

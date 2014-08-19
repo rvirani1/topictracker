@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+  before_action check_vote_authorization, :only => [:destroy]
 
   def create
     topic = Topic.find(params[:topic_id])
@@ -11,7 +12,6 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    check_vote_authorization
     vote = Vote.find_by(user_id: current_user.id, topic_id: params[:topic_id])
     if Vote.destroy(vote)
       redirect_to topics_path, :notice => "You removed your vote!"

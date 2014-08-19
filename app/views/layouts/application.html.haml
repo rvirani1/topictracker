@@ -12,14 +12,13 @@
     %nav.navbar.navbar-default(role = "navigation")
       .navbar-header
         =link_to "TopicTracker", root_path, class: "navbar-brand"
-      %ul.nav.navbar-nav.navbar-right
+      .nav.navbar-nav.navbar-right
         -if user_signed_in?
-          %li.btn.btn-default= link_to "Profile", edit_user_registration_path
-          %li.btn.btn-default= link_to "Logout", destroy_user_session_path, :method => :delete
+          .btn.btn-default.navbar-btn.navbar-right= link_to "Logout", destroy_user_session_path, :method => :delete
+          .btn.btn-default.navbar-btn.navbar-right= link_to "Profile", edit_user_registration_path
         -else
-          %li.btn.btn-default=link_to "Sign Up", new_user_registration_path
-          %li.btn.btn-default=link_to "Login", new_user_session_path
-    -# TODO is there a better way to do the stuff below
+          .btn.btn-default.navbar-btn.navbar-right=link_to "Login", new_user_session_path
+          .btn.btn-default.navbar-btn.navbar-right=link_to "Sign Up", new_user_registration_path
     - if notice
       #notice.invisible{ :"data-notice" => flash[:notice] }= flash[:notice]
     -if alert

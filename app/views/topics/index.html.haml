@@ -5,19 +5,9 @@
       =link_to(new_topic_path) do
         %button.btn.btn-primary.btn-block(type="button") New Topic!
     .col-md-3
-      -if @tag
-        %p.text-center
-          Filtering by Tag:
-          %span.label.label-default= @tag.name
-          =link_to topics_path do
-            %span.glyphicon.glyphicon-remove
+      = render partial: "shared/search_heading", locals: {tag: @tag}
     .col-md-3
-      =form_tag(topics_path, method: :get, role: "Search") do
-        .input-group
-          %span.input-group-addon.glyphicon.glyphicon-search
-          =text_field_tag(:search_value, value_search(params), placeholder: "Search", class: "form-control")
-          %span.input-group-btn
-            =submit_tag("Submit", class: "btn btn-default")
+      = render partial: "shared/search", locals: {params: params}
     .col-md-2
 .row
   .col-md-2
@@ -52,13 +42,13 @@
             %td
               %a{:href => topic_path(topic)}
                 .cell=topic.title
+              &nbsp &nbsp
+              %span.badge= topic.comments.count
               - topic.tags.each do |tag|
                 =link_to(tag_path(tag)) do
                   %span.label.label-primary.pull-right.tag= tag.name
             %td.creatorcolumn
-              %a{:href => topic_path(topic)}
-                = image_tag topic.creator.avatar.url(:icon), class: "thumbnail", id: "profile_thumbnail"
-                .cell= topic.creator.username
+              = render :partial => 'shared/display_user', :locals => {user: topic.creator, path_ref: topic_path(topic)}
             %td.editcolumn
               - if topic.creator == current_user
                 =link_to edit_topic_path(topic) do

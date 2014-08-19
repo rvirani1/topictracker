@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_many :created_topics, class_name: "Topic", dependent: :destroy, foreign_key: :creator_id
   has_many :votes
   has_many :voted_topics, class_name: "Topic", :through => :votes, :source => :topic
+  has_many :comments
+  has_many :commented_topics, class_name: "Topic", :through => :comments, :source => :topic
 
   # Using Paperclip for creating Avatar
   has_attached_file :avatar, :styles => {
