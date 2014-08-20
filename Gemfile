@@ -19,6 +19,7 @@ gem 'redcarpet'
 gem 'pg_search'
 gem 'paperclip', "~> 4.1"
 gem 'aws-sdk'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'spring'
@@ -26,6 +27,7 @@ group :development do
   # gem 'better_errors'
   # gem 'binding_of_caller'
   gem 'quiet_assets'
+  gem 'bullet'
 end
 
 group :production do
